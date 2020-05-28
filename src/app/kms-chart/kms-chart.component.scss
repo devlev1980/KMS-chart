@@ -1,9 +1,40 @@
+@import "src/assets/styles/colors";
+.kms-chart{
+  margin-bottom: 3rem !important;
+  box-shadow: 7px -1px 13px 0px rgba(0,0,0,0.8);
+  z-index: 100;
+}
 .form-group{
   max-width: 300px;
   width: 100%;
-  margin-top: 2rem;
+  margin: 0 auto;
+  background: $editFormBg;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  box-shadow: 3px -1px 13px 0px rgba(0,0,0,0.8);
+  opacity: 0;
 
+  transform: translateY(-100px);
+  z-index:1;
+  transition: 1s all ease-in;
+
+  &.show{
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  h3.card-title{
+    text-align: center;
+    color: $white;
+  }
   input{
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
+  }
+  button.btn.btn-info{
+    width: 100%;
+  }
+  strong.text-danger{
+   position: absolute;
+    top:56%;
   }
 }

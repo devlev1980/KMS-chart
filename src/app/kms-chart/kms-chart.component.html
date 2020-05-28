@@ -1,24 +1,18 @@
-<!--<chart-editor></chart-editor>-->
+<div class="kms-chart">
 
-<!--<google-chart #editable-->
-<!--              [title]="title"-->
-<!--              [type]="pieChart.chartType"-->
-<!--              [data]="pieChart"-->
-<!--              [columns]="chartColumns"-->
-<!--              [options]="options"-->
-<!--              [width]="width"-->
-<!--              [height]="height"-->
-<!--            (select)="onSelectChart($event)">-->
-<!--</google-chart>-->
+  <google-chart #chart
+                [data]="pieChart"
+                (chartSelect)='select($event)'>
+  </google-chart>
+</div>
 
-<google-chart [title]="'asdasd'" [data]="pieChart" (chartSelect)='select($event)'></google-chart>
-
-<form [formGroup]="quoteForm" (ngSubmit)="onSave(quoteForm.value)">
-  <div class="form-group" *ngIf="isShowEditField" >
+<form [formGroup]="quoteForm" (ngSubmit)="onSave(quoteForm)">
+  <div class="form-group"  [ngClass]="{'show': isShowEditField}">
+    <h3 class="card-title">Edit quote</h3>
     <input formControlName="quote"  type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-    <button class="btn btn-info" >Save</button>
+    <strong class="text-danger" *ngIf="quoteForm.invalid">Ths field is required</strong>
+    <button class="btn btn-info" [disabled]="quoteForm.get('quote').value === null">Save</button>
   </div>
-
 </form>
 
 

@@ -1,3 +1,16 @@
+@import "src/assets/styles/colors";
+header.header{
+  width: 100%;
+  background: $headerBg;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  h3{
+    color: $white;
+  }
+}
+
 .container{
   display: flex;
   align-items: center;
