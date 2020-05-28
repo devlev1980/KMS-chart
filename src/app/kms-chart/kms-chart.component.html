@@ -1,0 +1,24 @@
+<!--<chart-editor></chart-editor>-->
+
+<!--<google-chart #editable-->
+<!--              [title]="title"-->
+<!--              [type]="pieChart.chartType"-->
+<!--              [data]="pieChart"-->
+<!--              [columns]="chartColumns"-->
+<!--              [options]="options"-->
+<!--              [width]="width"-->
+<!--              [height]="height"-->
+<!--            (select)="onSelectChart($event)">-->
+<!--</google-chart>-->
+
+<google-chart [title]="'asdasd'" [data]="pieChart" (chartSelect)='select($event)'></google-chart>
+
+<form [formGroup]="quoteForm" (ngSubmit)="onSave(quoteForm.value)">
+  <div class="form-group" *ngIf="isShowEditField" >
+    <input formControlName="quote"  type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <button class="btn btn-info" >Save</button>
+  </div>
+
+</form>
+
+
