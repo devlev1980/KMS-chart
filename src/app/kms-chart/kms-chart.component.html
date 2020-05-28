@@ -1,7 +1,7 @@
 <div class="kms-chart">
 
   <google-chart #chart
-                [data]="pieChart"
+                [data]="barChart"
                 (chartSelect)='select($event)'>
   </google-chart>
 </div>
@@ -11,7 +11,7 @@
     <h3 class="card-title">Edit quote</h3>
     <input formControlName="quote"  type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
     <strong class="text-danger" *ngIf="quoteForm.invalid">Ths field is required</strong>
-    <button class="btn btn-info" [disabled]="quoteForm.get('quote').value === null">Save</button>
+    <button class="btn btn-info" [disabled]="quoteForm.get('quote').value === null || quoteForm.invalid">Save</button>
   </div>
 </form>
 
