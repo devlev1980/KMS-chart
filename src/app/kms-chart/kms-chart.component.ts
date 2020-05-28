@@ -64,7 +64,7 @@ export class KmsChartComponent implements OnInit {
     } else {
       this.isShowEditField = false;
     }
-    if (event.row === null) {
+    if (event.row === null ) {
       this.isShowEditField = false;
     }
 
