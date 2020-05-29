@@ -1,15 +1,16 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {KmsChartService} from './kms-chart.service';
 import {GoogleChartInterface} from 'ng2-google-charts/lib/google-chart/google-chart.component';
 import {ChartSelectEvent, GoogleChartComponent} from 'ng2-google-charts';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {IKMSChart, IQuote} from '../models/chart-model';
+import {IQuote} from '../models/chart-model';
 import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'yl-kms-chart',
   templateUrl: './kms-chart.component.html',
-  styleUrls: ['./kms-chart.component.scss']
+  styleUrls: ['./kms-chart.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class KmsChartComponent implements OnInit, OnDestroy {
 
@@ -45,7 +46,7 @@ export class KmsChartComponent implements OnInit, OnDestroy {
         width: 1200,
         chart: {
           title: 'AAPL',
-          subtitle: 'Sales, Expenses, and Profit: 2020',
+          subtitle: 'Sales AAPL of 2020',
         }
       },
     };
