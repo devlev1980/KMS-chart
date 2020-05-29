@@ -6,12 +6,12 @@
   </google-chart>
 </div>
 
-<form [formGroup]="quoteForm" (ngSubmit)="onSave(quoteForm)">
-  <div class="form-group"  [ngClass]="{'show': isShowEditField}">
+<form [formGroup]="editForm" (ngSubmit)="onSave(editForm)">
+  <div class="form-group"  [ngClass]="{'show': isShowEditForm}">
     <h3 class="card-title">Edit quote</h3>
     <input formControlName="quote"  type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-    <strong class="text-danger" *ngIf="quoteForm.invalid">Ths field is required</strong>
-    <button class="btn btn-info" [disabled]="quoteForm.get('quote').value === null || quoteForm.invalid">Save</button>
+    <strong class="text-danger" *ngIf="editForm.invalid">Ths field is required</strong>
+    <button class="btn btn-info" [disabled]="editForm.get('quote').value === null || editForm.invalid">Save</button>
   </div>
 </form>
 

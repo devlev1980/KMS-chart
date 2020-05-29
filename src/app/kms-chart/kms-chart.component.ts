@@ -16,11 +16,11 @@ export class KmsChartComponent implements OnInit, OnDestroy {
   @ViewChild('chart', {static: false})
   chart: GoogleChartComponent;
   barChart: GoogleChartInterface;
-  isShowEditField: boolean = false;
-  quoteForm: FormGroup;
+  isShowEditForm: boolean = false;
+  editForm: FormGroup;
   selectedQuote: IQuote[];
   dataQuotes: IQuote[][] = [];
-  selectedRow: number;
+  selectedBar: number;
   subscription: Subscription;
 
   constructor(private kmsService: KmsChartService, private fb: FormBuilder) {
@@ -52,32 +52,32 @@ export class KmsChartComponent implements OnInit, OnDestroy {
   }
 
   initializeForm() {
-    this.quoteForm = this.fb.group({
+    this.editForm = this.fb.group({
       quote: this.fb.control('', Validators.required),
     });
   }
 
   select(event: ChartSelectEvent) {
     if (event) {
-      this.selectedRow = event.row;
-      this.isShowEditField = true;
+      this.selectedBar = event.row;
+      this.isShowEditForm = true;
       this.selectedQuote = event.selectedRowValues;
-      this.quoteForm.get('quote').patchValue(event.selectedRowValues[1]);
+      this.editForm.get('quote').patchValue(event.selectedRowValues[1]);
     } else {
-      this.isShowEditField = false;
+      this.isShowEditForm = false;
     }
     if (event.row === null) {
-      this.isShowEditField = false;
+      this.isShowEditForm = false;
     }
 
 
   }
 
   onSave(quoteForm: FormGroup) {
-    this.dataQuotes[this.selectedRow][1] = quoteForm.get('quote').value;
+    this.dataQuotes[this.selectedBar][1] = quoteForm.get('quote').value;
     this.barChart.dataTable = this.dataQuotes;
     this.chart.draw(this.barChart);
-    this.isShowEditField = false;
+    this.isShowEditForm = false;
   }
 
   ngOnDestroy() {
