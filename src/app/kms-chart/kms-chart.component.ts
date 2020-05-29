@@ -1,34 +1,36 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {KmsChartService} from './kms-chart.service';
 import {GoogleChartInterface} from 'ng2-google-charts/lib/google-chart/google-chart.component';
 import {ChartSelectEvent, GoogleChartComponent} from 'ng2-google-charts';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {IQuote} from '../models/chart-model';
+import {IKMSChart, IQuote} from '../models/chart-model';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'yl-kms-chart',
   templateUrl: './kms-chart.component.html',
   styleUrls: ['./kms-chart.component.scss']
 })
-export class KmsChartComponent implements OnInit {
+export class KmsChartComponent implements OnInit, OnDestroy {
 
   @ViewChild('chart', {static: false})
   chart: GoogleChartComponent;
   barChart: GoogleChartInterface;
   isShowEditField: boolean = false;
   quoteForm: FormGroup;
-  selectedQuote: any[] = [];
+  selectedQuote: IQuote[];
   dataQuotes: IQuote[][] = [];
   selectedRow: number;
+  subscription: Subscription;
 
   constructor(private kmsService: KmsChartService, private fb: FormBuilder) {
   }
 
   ngOnInit() {
     this.initializeChart();
-    this.kmsService.getKmsChartData()
+    this.subscription = this.kmsService.getKmsChartData()
       .subscribe(data => {
-        this.barChart.dataTable = this.dataQuotes = data.quotes;
+        this.barChart.dataTable = this.dataQuotes = data;
       });
     this.initializeForm();
   }
@@ -64,7 +66,7 @@ export class KmsChartComponent implements OnInit {
     } else {
       this.isShowEditField = false;
     }
-    if (event.row === null ) {
+    if (event.row === null) {
       this.isShowEditField = false;
     }
 
@@ -76,6 +78,10 @@ export class KmsChartComponent implements OnInit {
     this.barChart.dataTable = this.dataQuotes;
     this.chart.draw(this.barChart);
     this.isShowEditField = false;
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
 }

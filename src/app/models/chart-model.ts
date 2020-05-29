@@ -1,3 +1,7 @@
-export interface IQuote {
-  quotes: [[string | number]];
+export interface IKMSChart {
+  quotes: IQuote[][];
+}
+
+export interface IQuote extends Array<string | number> {
+
 }
